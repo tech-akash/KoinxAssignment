@@ -42,8 +42,8 @@ const getTransactions = async (req: Request, res: Response) => {
                 address : userAddress,
                 startblock : "0",
                 endblock : "99999999",
-                page : "1", 
-                offset : "10",
+                // page : "1", 
+                // offset : "10",
                 sort : "asc",
                 apikey : process.env.API_KEY
             },
