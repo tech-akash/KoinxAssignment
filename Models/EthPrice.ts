@@ -1,6 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose , {Types, Schema, Document} from 'mongoose';
 
-const EthPriceSchema = new mongoose.Schema(
+export interface IEthPrice extends Document{
+    _id: Types.ObjectId;
+    price: number;
+}
+
+const EthPriceSchema = new Schema(
     {
         price: {
             type: Number,
@@ -10,4 +15,4 @@ const EthPriceSchema = new mongoose.Schema(
     { timestamps: true } 
 );
 
-export default mongoose.model('EthPrice', EthPriceSchema);
+export default mongoose.model<IEthPrice>('EthPrice', EthPriceSchema);

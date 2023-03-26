@@ -1,6 +1,33 @@
-import mongoose from 'mongoose';
+import mongoose, {Schema, Document} from 'mongoose';
 
-const UserTranscationSchema = new mongoose.Schema(
+interface transaction{
+      blockNumber: string;
+      timeStamp: number;
+      nonce: number;
+      blockHash: string;
+      transactionIndex: number;
+      from: string;
+      to: string;
+      value: number;
+      gas: number;
+      gasPrice: number;
+      isError: boolean;
+      txreceipt_status: boolean ;
+      input?: string;
+      contractAddress?: string;
+      cumulativeGasUsed: number;
+      gasUsed: number;
+      confirmations: number;
+      methodId?: string;
+      functionName?: string;
+}
+
+export interface IUserTransaction extends Document {
+    _id: string;
+    transactions: transaction[];
+}
+
+const UserTranscationSchema = new Schema(
     {
         _id: {
             type: String,
@@ -14,9 +41,13 @@ const UserTranscationSchema = new mongoose.Schema(
                     requried: true
                 },
                 timeStamp:{
-                    type: Number
+                    type: Number,
+                    required: true
                 },
-                nonce: Number,
+                nonce:{
+                    type: Number,
+                    required: true
+                },
                 blockHash:{
                     type: String,
                     required: true
@@ -74,4 +105,4 @@ const UserTranscationSchema = new mongoose.Schema(
     { timestamps: true } 
 );
 
-export default mongoose.model('UserTranscation', UserTranscationSchema);
+export default mongoose.model<IUserTransaction>('UserTranscation', UserTranscationSchema);
