@@ -27,7 +27,7 @@ mongoose.connect(
 
 const app: Application = express();
 
-cron.schedule('10 * * * *', async () => {
+cron.schedule('*/10 * * * *', async () => {
   try{
     const currentEthPrice : ResponseData = await getCurrentEthPrice();
         if(currentEthPrice.status !== true){
