@@ -23,13 +23,14 @@ export interface transaction{
 }
 
 export interface IUserTransaction extends Document {
-    _id: string;
+    _id: Types.ObjectId;
+    userAddress: string;
     transactions: Types.Array<transaction>;
 }
 
 const UserTranscationSchema = new Schema(
     {
-        _id: {
+        userAddress: {
             type: String,
             required: true,
             unique: true
@@ -104,5 +105,7 @@ const UserTranscationSchema = new Schema(
     },
     { timestamps: true } 
 );
+
+UserTranscationSchema.index({_id:1, userAddress:1});
 
 export default mongoose.model<IUserTransaction>('UserTranscation', UserTranscationSchema);
