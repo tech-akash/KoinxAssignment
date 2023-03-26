@@ -1,6 +1,6 @@
-import mongoose, {Schema, Document} from 'mongoose';
+import mongoose, {Schema, Document, Types} from 'mongoose';
 
-interface transaction{
+export interface transaction{
       blockNumber: string;
       timeStamp: number;
       nonce: number;
@@ -24,7 +24,7 @@ interface transaction{
 
 export interface IUserTransaction extends Document {
     _id: string;
-    transactions: transaction[];
+    transactions: Types.Array<transaction>;
 }
 
 const UserTranscationSchema = new Schema(
