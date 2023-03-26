@@ -7,7 +7,7 @@ export interface transaction{
       blockHash: string;
       transactionIndex: number;
       from: string;
-      to: string;
+      to?: string;
       value: number;
       gas: number;
       gasPrice: number;
@@ -25,7 +25,7 @@ export interface transaction{
 export interface IUserTransaction extends Document {
     _id: Types.ObjectId;
     userAddress: string;
-    transactions: Types.Array<transaction>;
+    transactions: transaction[];
 }
 
 const UserTranscationSchema = new Schema(
@@ -51,7 +51,8 @@ const UserTranscationSchema = new Schema(
                 },
                 blockHash:{
                     type: String,
-                    required: true
+                    required: true,
+                    unique: true
                 },
                 transactionIndex:{
                     type: Number,
@@ -63,7 +64,6 @@ const UserTranscationSchema = new Schema(
                 },
                 to:{
                     type: String,
-                    required: true
                 },
                 value:{
                     type: Number,
