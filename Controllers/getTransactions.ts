@@ -78,7 +78,6 @@ const getTransactions = async (req: Request, res: Response) => {
 
             await userTransaction.save();
             
-            console.log(userTransaction);
             return res.status(200).json({
                 transactions: userTransaction.transactions
             });
